@@ -9,6 +9,9 @@ services:
         volumes: []
         networks:
             - laravel
+        depends_on:
+            db:
+                condition: service_healthy
         command:
             -  php-fpm
 
