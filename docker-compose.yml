@@ -40,26 +40,7 @@ services:
             - db_data:/var/lib/mysql
         networks:
             - laravel
-
-    artisan:
-        build:
-            context: .
-            dockerfile: Dockerfile
-        depends_on:
-            - app
-            - db
-        working_dir: /var/www
-        command: >
-            sh -c "
-              composer install --no-dev --optimize-autoloader &&
-              php artisan key:generate &&
-              php artisan migrate --seed &&
-              php artisan config:clear &&
-              php artisan route:clear
-            "
-        networks:
-            - laravel
-
+            -
 networks:
     laravel:
 
