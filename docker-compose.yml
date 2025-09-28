@@ -40,7 +40,7 @@ services:
             - db_data:/var/lib/mysql
         networks:
             - laravel
-            -
+
 networks:
     laravel:
 
