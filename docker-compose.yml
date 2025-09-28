@@ -49,6 +49,8 @@ services:
         working_dir: /var/www
         command: >
             sh -c "
+              composer install --no-dev --optimize-autoloader &&
+              php-fpm &&
               php artisan key:generate &&
               php artisan migrate --seed &&
               php artisan config:clear &&
