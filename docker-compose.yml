@@ -9,9 +9,6 @@ services:
         volumes: []
         networks:
             - laravel
-        depends_on:
-            db:
-                condition: service_healthy
         command:
             -  php-fpm
 
@@ -27,29 +24,6 @@ services:
         networks:
             - laravel
 
-    db:
-        image: mysql:8.0
-        container_name: laravel_db
-        restart: unless-stopped
-        environment:
-            MYSQL_DATABASE: laravel
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_USER: laravel
-            MYSQL_PASSWORD: secret
-        ports:
-            - "3306:3306"
-        volumes:
-            - db_data:/var/lib/mysql
-        networks:
-            - laravel
-        healthcheck:
-            test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot" ]
-            interval: 10s
-            timeout: 5s
-            retries: 5
-
 networks:
     laravel:
 
-volumes:
-    db_data:
