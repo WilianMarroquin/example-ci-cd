@@ -10,6 +10,8 @@ services:
             - .:/var/www
         networks:
             - laravel
+        command:
+            -  php-fpm
 
     webserver:
         image: nginx:alpine
@@ -50,7 +52,6 @@ services:
         command: >
             sh -c "
               composer install --no-dev --optimize-autoloader &&
-              php-fpm &&
               php artisan key:generate &&
               php artisan migrate --seed &&
               php artisan config:clear &&
