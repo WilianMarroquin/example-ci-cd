@@ -56,3 +56,5 @@ jobs:
             sudo docker-compose exec -T app php artisan route:cache
             sudo docker-compose exec -T app php artisan view:cache
             sudo docker-compose exec -T app php artisan storage:link
+            sudo docker-compose exec -T app chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+            sudo docker-compose exec -T app chmod -R 775 /var/www/storage /var/www/bootstrap/cache
