@@ -29,9 +29,9 @@ jobs:
           key: ${{ secrets.AWS_SSH_KEY }}
           script: |
             cd /home/ubuntu/laravel-app
-            echo "APP_ENV=production" > .env
+            echo "APP_ENV=local" > .env
             echo "APP_KEY=${{ secrets.APP_KEY }}" >> .env
-            echo "APP_DEBUG=false" >> .env
+            echo "APP_DEBUG=true" >> .env
             echo "APP_URL=${{ secrets.APP_URL }}" >> .env
             echo "DB_CONNECTION=mysql" >> .env
             echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
@@ -51,3 +51,8 @@ jobs:
             sudo docker-compose down
             sudo docker-compose up -d --build
             sudo docker-compose exec -T app php artisan migrate --force
+            sudo docker-compose exec -T app php artisan key:generate --force
+            sudo docker-compose exec -T app php artisan config:cache
+            sudo docker-compose exec -T app php artisan route:cache
+            sudo docker-compose exec -T app php artisan view:cache
+            sudo docker-compose exec -T app php artisan storage:link
