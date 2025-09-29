@@ -28,3 +28,4 @@ services:   # 👈 Aquí definimos los contenedores que forman parte de la app
 networks:
     laravel:   # 👈 Define la red interna "laravel"
     #    Para que app (php-fpm) y webserver (nginx) se comuniquen entre sí
+
