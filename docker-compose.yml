@@ -8,8 +8,7 @@ services:
         working_dir: /var/www
         networks:
             - laravel
-        command:
-            -  php-fpm
+        command: ["php-fpm", "-F"]
 
     webserver:
         image: nginx:alpine
