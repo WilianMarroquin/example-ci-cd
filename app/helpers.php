@@ -221,26 +221,28 @@ function optionsParentAuthUser($user = null){
 
 function getLogo($conversion='webp'){
 
-    /**
-     * @var Configuration $config
-     */
-    $config = Configuration::find(Configuration::LOGO);
-
-    $media = $config->getMediaLogo();
-
-    return $media ? $media->getUrl($conversion) : asset('img/default.svg');
+//    /**
+//     * @var Configuration $config
+//     */
+//    $config = Configuration::find(Configuration::LOGO);
+//
+//    $media = $config->getMediaLogo();
+//
+//    return $media ? $media->getUrl($conversion) : asset('img/default.svg');
+    return asset('img/fondo_login.png');
 }
 
 function getFondoLogin($conversion=''){
 
-    /**
-     * @var Configuration $config
-     */
-    $config = Configuration::find(Configuration::FONDO_LOGIN);
-
-    $media = $config->getMediaFondoLogin();
-
-    return $media ? $media->getUrl($conversion) : asset('img/default.svg');
+//    /**
+//     * @var Configuration $config
+//     */
+//    $config = Configuration::find(Configuration::FONDO_LOGIN);
+//
+//    $media = $config->getMediaFondoLogin();
+//
+//    return $media ? $media->getUrl($conversion) : asset('img/default.svg');
+    return asset('img/fondo_login.png');
 }
 
 
