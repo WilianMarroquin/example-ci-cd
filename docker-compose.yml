@@ -1,27 +1,30 @@
-services:
-    app:
+services:   # 👈 Aquí definimos los contenedores que forman parte de la app
+    app:      # 👈 Este es el contenedor de Laravel (PHP-FPM)
         build:
-            context: .
-            dockerfile: Dockerfile
+            context: .               # 👈 Usa el Dockerfile que está en la raíz del proyecto
+            dockerfile: Dockerfile   # 👈 Archivo Dockerfile para construir la imagen de Laravel
         container_name: laravel_app
-        restart: unless-stopped
-        working_dir: /var/www
+        restart: unless-stopped    # 👈 Si el contenedor se apaga, se reinicia automáticamente
+        working_dir: /var/www      # 👈 Carpeta de trabajo dentro del contenedor
         networks:
-            - laravel
-        command: ["php-fpm", "-F"]
+            - laravel                # 👈 Conecta este contenedor a la red "laravel"
+        command: ["php-fpm", "-F"] # 👈 Arranca PHP-FPM en primer plano (sirve PHP)
 
-    webserver:
-        image: nginx:alpine
+    webserver:   # 👈 Este es el contenedor Nginx (el servidor web)
+        image: nginx:alpine        # 👈 Usa la imagen oficial de Nginx (versión ligera Alpine)
         container_name: laravel_nginx
         restart: unless-stopped
         ports:
-            - "8080:80"
+            - "80:80"                # 👈 Expone el puerto 80 del host → puerto 80 del contenedor
+            #    Así accedes con http://localhost directamente
         volumes:
-            - .:/var/www
+            - .:/var/www             # 👈 Monta el proyecto (host) en /var/www (contenedor)
+            #    Aquí es donde Nginx y PHP verán tu código Laravel
             - ./docker/nginx/conf.d:/etc/nginx/conf.d
+            # 👈 Monta tu configuración personalizada de Nginx
         networks:
-            - laravel
+            - laravel                # 👈 Conecta este contenedor a la red "laravel"
 
 networks:
-    laravel:
-
+    laravel:   # 👈 Define la red interna "laravel"
+    #    Para que app (php-fpm) y webserver (nginx) se comuniquen entre sí
