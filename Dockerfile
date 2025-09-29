@@ -16,11 +16,8 @@ WORKDIR /var/www
 # Copiar código
 COPY . .
 
-ENV COMPOSER_ALLOW_SUPERUSER=1
-ENV APP_ENV=production
-ENV APP_DEBUG=false
-
 # Instalar dependencias de Laravel
-RUN composer install --no-dev --optimize-autoloader --no-scripts
+RUN composer install
+
 
 CMD ["php-fpm"]
